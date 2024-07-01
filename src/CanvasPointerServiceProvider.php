@@ -10,7 +10,6 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
-use RuelLuna\CanvasPointer\Commands\CanvasPointerCommand;
 use RuelLuna\CanvasPointer\Testing\TestsCanvasPointer;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -113,7 +112,7 @@ class CanvasPointerServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            CanvasPointerCommand::class,
+            // CanvasPointerCommand::class,
         ];
     }
 
@@ -147,7 +146,7 @@ class CanvasPointerServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_canvas-pointer_table',
+            // 'create_canvas-pointer_table',
         ];
     }
 }

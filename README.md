@@ -1,12 +1,14 @@
-# A Filament field that allows users to click and point markers on an image.
+# A Filament field that allows users to click and point to mark references on an image.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/ruelluna/canvas-pointer.svg?style=flat-square)](https://packagist.org/packages/ruelluna/canvas-pointer)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/ruelluna/canvas-pointer/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/ruelluna/canvas-pointer/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ruelluna/canvas-pointer/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ruelluna/canvas-pointer/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/ruelluna/canvas-pointer.svg?style=flat-square)](https://packagist.org/packages/ruelluna/canvas-pointer)
 
+![Filament Canvas Pointer](main.jpg)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+
+I have used it for a client that needs visual reprensentations to where the pains are located in the body. What is your use case? This field will produce a base-64 image. If you're saving this to your table, I recommend making a `BLOB` column or convert it to an actual image file.
 
 ## Installation
 
@@ -16,44 +18,24 @@ You can install the package via composer:
 composer require ruelluna/canvas-pointer
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="canvas-pointer-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="canvas-pointer-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="canvas-pointer-views"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
 
 ## Usage
 
 ```php
-$canvasPointer = new RuelLuna\CanvasPointer();
-echo $canvasPointer->echoPhrase('Hello, RuelLuna!');
+CanvasPointerField::make('body-points')
+    ->pointRadius(15) // default is 5
+    ->imageUrl('your image source')
+    ->width(800) // required
+    ->height(800) // required
+    ->label('Select body parts that are in pain'),
 ```
 
-## Testing
+## Todos
+- [ ] Automatically detect height and width
+- [ ] Table Column Component
+- [ ] Entry Component
+- [ ] `npm` Konva dependency
 
-```bash
-composer test
-```
 
 ## Changelog
 
