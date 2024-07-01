@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace RuelLuna\CanvasPointer;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class CanvasPointerPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'canvas-pointer';
     }
 
     public function register(Panel $panel): void
