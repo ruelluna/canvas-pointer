@@ -10,11 +10,11 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use RuelLuna\CanvasPointer\Commands\CanvasPointerCommand;
+use RuelLuna\CanvasPointer\Testing\TestsCanvasPointer;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use RuelLuna\CanvasPointer\Commands\CanvasPointerCommand;
-use RuelLuna\CanvasPointer\Testing\TestsCanvasPointer;
 
 class CanvasPointerServiceProvider extends PackageServiceProvider
 {
