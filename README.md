@@ -5,8 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/ruelluna/canvas-pointer/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/ruelluna/canvas-pointer/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/ruelluna/canvas-pointer.svg?style=flat-square)](https://packagist.org/packages/ruelluna/canvas-pointer)
 
-![Filament Canvas Pointer](main.jpg){.filament-hidden}
-
+<img src="https://raw.githubusercontent.com/ruelluna/canvas-pointer/main/main.jpg" class="filament-hidden">
 
 I have used it for a client that needs visual reprensentations to where the pains are located in the body. What is your use case? This field will produce a base-64 image. If you're saving this to your table, I recommend making a `BLOB` column or convert it to an actual image file.
 
