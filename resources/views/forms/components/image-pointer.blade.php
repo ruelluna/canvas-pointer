@@ -75,6 +75,7 @@
 
                     // Update the state with the new coordinates
                     let currentState = state || [];
+                    currentState = Array.isArray(currentState) ? currentState : [];
                     currentState.push(coordinates);
                     state = currentState;
                 }
@@ -98,7 +99,6 @@
             } --}}
         "
     >
-        {{ $getWidth() }}
         <div
                 x-ref="containerRef"
                 id="container">
