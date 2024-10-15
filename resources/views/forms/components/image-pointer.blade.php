@@ -1,23 +1,26 @@
 <x-dynamic-component
-        :component="$getFieldWrapperView()"
-        :field="$field"
+    :component="$getFieldWrapperView()"
+    :field="$field"
 >
-
     @php
         $width = $getWidth();
         $height = $getHeight();
         $pointRadius = $getPointRadius() ?? 5;
         $imageUrl = $getImageUrl();
     @endphp
+
     <div
-            x-data="{ state: $wire.$entangle('{{ $getStatePath() }}') }"
-            x-init="
+        x-data="{
+            coordinates: $wire.$entangle('{{ $getStatePath() }}').defer,
+            imageData: '',
+            base64Img: '',
+        }"
+        x-init="
             const stage = new Konva.Stage({
                 container: $refs.containerRef,
                 @if($width)
                     width: @js($width),
                 @endif
-
                 @if($height)
                     height: @js($height),
                 @endif
@@ -30,38 +33,40 @@
             Konva.Image.fromURL(
                 @js($imageUrl),
                 function (image) {
-                image.setAttrs({
-                    x: 0,
-                    y: 0,
-                    @if($width)
-                        width: @js($width),
-                    @endif
+                    image.setAttrs({
+                        x: 0,
+                        y: 0,
+                        @if($width)
+                            width: @js($width),
+                        @endif
+                        @if($height)
+                            height: @js($height),
+                        @endif
+                    });
+                    layer.add(image);
+                    layer.draw();
+                    bodyImage = image;
+                }
+            );
 
-                    @if($height)
-                        height: @js($height),
-                    @endif
-                });
-                layer.add(image);
-                layer.draw();
-                bodyImage = image;
-            });
-
-            stage.on('click', function (e) {
+            stage.on('click', function (e)
+            {
                 var pointerPosition = stage.getPointerPosition();
-                var coordinates = [pointerPosition.x, pointerPosition.y];
                 var shape = e.target;
 
                 if (shape !== stage && shape !== bodyImage) {
-                    // If the clicked shape is a circle, remove it
                     shape.destroy();
                     layer.draw();
 
-                    // Remove the coordinates from the state
-                    let currentState = state || [];
-                    currentState = currentState.filter(coord => coord[0] !== shape.attrs.x || coord[1] !== shape.attrs.y);
-                    state = currentState;
+                    // Remove coords from the coordinates array
+                    let currentCoordinates = coordinates || [];
+                    currentCoordinates = currentCoordinates.filter(
+                        coord => coord[0] !== shape.attrs.x || coord[1] !== shape.attrs.y
+                    );
+
+                    coordinates = currentCoordinates;
                 } else if (shape === stage || shape === bodyImage) {
-                    // Draw a circle at the click location
+                    // Draw a circle at the clicked location
                     var circle = new Konva.Circle({
                         x: pointerPosition.x,
                         y: pointerPosition.y,
@@ -70,40 +75,26 @@
                         stroke: 'black',
                         strokeWidth: 1,
                     });
+
                     layer.add(circle);
                     layer.draw();
 
-                    // Update the state with the new coordinates
-                    let currentState = state || [];
-                    currentState = Array.isArray(currentState) ? currentState : [];
-                    currentState.push(coordinates);
-                    state = currentState;
+                    // Add new coords to the coordinates array
+                    let currentCoordinates = coordinates || [];
+                    currentCoordinates.push([pointerPosition.x, pointerPosition.y]);
+                    coordinates = currentCoordinates;
                 }
 
-                state = stage.toDataURL()
+                updateImageData();
+                $wire.set('{{ $getStatePath() }}', base64Img);
             });
 
-             {{-- document.getElementById('saveButton').addEventListener('click', function () {
-                var dataURL = stage.toDataURL();
-                console.log(dataURL);
-                downloadURI(dataURL, 'stage.png');
-            });
-
-            function downloadURI(uri, name) {
-                var link = document.createElement('a');
-                link.download = name;
-                link.href = uri;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } --}}
-        "
-    >
-        <div
-                x-ref="containerRef"
-                id="container">
-        </div>
-        <input x-model="state" type="hidden" name="coordinates" id="coordinates">
-        {{-- <button type="button" id="saveButton">Save Image</button> --}}
+            function updateImageData()
+            {
+                base64Img = stage.toDataURL();
+            }">
+        <div wire:ignore x-ref="containerRef" id="container"></div>
+        <input x-model="coordinates" type="hidden" name="coordinates" id="coordinates">
+        <input type="hidden" name="canvas_data" :value="base64Img">
     </div>
 </x-dynamic-component>
