@@ -85,7 +85,7 @@ class CanvasPointerServiceProvider extends PackageServiceProvider
         }
 
         // Testing
-        Testable::mixin(new TestsCanvasPointer());
+        Testable::mixin(new TestsCanvasPointer);
     }
 
     protected function getAssetPackageName(): ?string
