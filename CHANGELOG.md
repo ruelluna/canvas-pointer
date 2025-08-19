@@ -2,6 +2,16 @@
 
 All notable changes to `canvas-pointer` will be documented in this file.
 
+## 1.0.5 - 2025-07-24
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot[bot] in https://github.com/ruelluna/canvas-pointer/pull/7
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot[bot] in https://github.com/ruelluna/canvas-pointer/pull/8
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/ruelluna/canvas-pointer/pull/10
+
+**Full Changelog**: https://github.com/ruelluna/canvas-pointer/compare/1.0.4...1.0.5
+
 ## 1.0.4 - 2024-10-15
 
 ### What's Changed
