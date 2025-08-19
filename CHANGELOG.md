@@ -2,6 +2,14 @@
 
 All notable changes to `canvas-pointer` will be documented in this file.
 
+## 1.0.6 - 2025-08-19
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/ruelluna/canvas-pointer/pull/12
+
+**Full Changelog**: https://github.com/ruelluna/canvas-pointer/compare/1.0.5...1.0.6
+
 ## 1.0.5 - 2025-07-24
 
 ### What's Changed
